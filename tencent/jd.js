@@ -7,9 +7,9 @@
 58 59 6,9,14,17,20 * * * https://raw.githubusercontent.com/KingRan/KR/main/jd_5_2.js, tag=极速版抢卷, enabled=true
 ================Loon==============
 [Script]
-cron "58 59 5,9,14,17,20 * * *" script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_5_2.js,tag=极速版抢卷
+cron "58 59 6,9,14,17,20 * * *" script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_5_2.js,tag=极速版抢卷
 ===============Surge=================
-极速版抢卷 = type=cron,cronexp="58 59 6,9,14,17,20 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_5_2.js
+极速版抢卷 = type=cron,cronexp="58 59 5,9,14,17,20 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_5_2.js
 ============小火箭=========
 极速版抢卷 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/KR/main/jd_5_2.js, cronexpr="58 59 6,9,14,17,20 * * *", timeout=3600, enable=true
  */
