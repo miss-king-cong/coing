@@ -32,18 +32,32 @@ TxStockAppUrl与TxStockAppHeader：打开APP，点击头像->右上角金币->�
 TxStockWxHeader：打开 腾讯自选股微信版|微证券 公众号，右下角好福利->福利中心
 
 V2P：
-重写: https://wzq.tenpay.com/cgi-bin/activity_task_daily.fcgi?   https://raw.githubusercontent.com/leafxcy/JavaScript/main/txstock.js
+重写: https://wzq.tenpay.com/cgi-bin/activity_task_daily.fcgi?   https://raw.githubusercontent.com/miss-king-cong/coing/main/tencent/txzxg.js
 MITM: wzq.tenpay.com
 
 圈X：
 [task_local]
 #腾讯自选股
-35 11,16 * * * https://raw.githubusercontent.com/leafxcy/JavaScript/main/txstock.js, tag=腾讯自选股, enabled=true
+35 11,16 * * * https://raw.githubusercontent.com/miss-king-cong/coing/main/tencent/txzxg.js, tag=腾讯自选股, enabled=true
+
 [rewrite_local]
 #获取APP和微信微证券的URL和header
 https://wzq.tenpay.com/cgi-bin/activity_task_daily.fcgi? url script-request-header https://raw.githubusercontent.com/leafxcy/JavaScript/main/txstock.js
 [MITM]
 hostname = wzq.tenpay.com
+腾讯自选股
+
+============Quantumultx===============
+[task_local]
+#腾讯自选股
+35 11,16 * * * https://raw.githubusercontent.com/miss-king-cong/coing/main/tencent/txzxg.js, tag=腾讯自选股, enabled=true
+================Loon==============
+[Script]
+cron "35 11,16 * * *" script-path=https://raw.githubusercontent.com/miss-king-cong/coing/main/tencent/txzxg.js,tag=腾讯自选股
+===============Surge=================
+腾讯自选股 = type=cron,cronexp="35 11,16 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/miss-king-cong/coing/main/tencent/txzxg.js
+============小火箭=========
+腾讯自选股 = type=cron,script-path=https://raw.githubusercontent.com/miss-king-cong/coing/main/tencent/txzxg.js, cronexpr="35 11,16 * * *", timeout=3600, enable=true
 
 */
 
