@@ -18,6 +18,7 @@ cron "21 3,8 * * *" script-path=jd_speed_sign.js,tag=滴滴果园
 
 const $ = new Env('滴滴果园');
 const notify = $.isNode() ? require('./sendNotify') : '';
+var appUrlArr = [];
 var xpsid = '';
 var xoid = '';
 var uid = '';
@@ -47,7 +48,7 @@ async function checkEnv() {
         DdgyWxUrl = $.getdata('DdgyWxUrl');
     }
     if (!DdgyWxUrl) {
-        str1 = DdgyWxUrl ? "" : "DdgyWxUrl";
+        let str1 = DdgyWxUrl ? "" : "DdgyWxUrl";
         $.log(`未找到环境变量: ${str1}\n`);
         return false;
     }
@@ -72,7 +73,7 @@ async function checkEnv() {
 }
 
 async function getEnvParam(userNum) {
-    appUrlArrVal = appUrlArr[userNum];
+    let appUrlArrVal = appUrlArr[userNum];
     if (appUrlArrs.indexOf('?') != -1) {
         let str = appUrlArrVal.split('?')[1];
         let str2 = str.split('&');
