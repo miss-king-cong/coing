@@ -74,7 +74,7 @@ async function checkEnv() {
 
 async function getEnvParam(userNum) {
     let appUrlArrVal = appUrlArr[userNum];
-    if (appUrlArrs.indexOf('?') != -1) {
+    if (appUrlArrVal.indexOf('?') != -1) {
         let str = appUrlArrVal.split('?')[1];
         let str2 = str.split('&');
         for (let i = 0; i < str2.length; i++) {
