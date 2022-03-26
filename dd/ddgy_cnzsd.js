@@ -100,8 +100,9 @@ async function getEnvParam(userNum) {
 
 async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
+        $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
-        await $.wait(500); //等待
+        await $.wait(5000); //等待5秒
     }
 }
 
