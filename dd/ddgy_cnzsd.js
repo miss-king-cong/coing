@@ -2,22 +2,21 @@
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
-#滴滴果园
-21 3,8 * * * jd_speed_sign.js, tag=滴滴果园, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+#滴滴果园吹牛赚水滴
+00 00 08 * * * jd_speed_sign.js, tag=滴滴果园吹牛赚水滴, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "21 3,8 * * *" script-path=jd_speed_sign.js,tag=滴滴果园
+cron "00 00 08 * * *" script-path=jd_speed_sign.js,tag=滴滴果园吹牛赚水滴
 
 ===============Surge=================
-滴滴果园 = type=cron,cronexp="21 3,8 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
+滴滴果园吹牛赚水滴 = type=cron,cronexp="00 00 08 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
 
 ============小火箭=========
-滴滴果园 = type=cron,script-path=jd_speed_sign.js, cronexpr="21 3,8 * * *", timeout=33600, enable=true
+滴滴果园吹牛赚水滴 = type=cron,script-path=jd_speed_sign.js, cronexpr="00 00 08 * * *", timeout=33600, enable=true
 */
 
-const $ = new Env('滴滴果园');
-const notify = $.isNode() ? require('./sendNotify') : '';
+const $ = new Env('滴滴果园吹牛赚水滴');
 var appUrlArr = [];
 var xpsid = '';
 var xoid = '';
@@ -33,9 +32,6 @@ var wsgsig = '';
     } else {
         //获取用户信息
         await initAccountInfo();
-
-        await goal();
-
     }
 })().catch((e) => $.logErr(e)).finally(() => $.done());
 
@@ -102,6 +98,7 @@ async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
+        await goal();
         await $.wait(5000); //等待5秒
     }
 }
