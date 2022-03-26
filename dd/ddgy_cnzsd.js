@@ -61,15 +61,11 @@ async function checkEnv() {
         appUrlArrs = DdgyWxUrl.split('@');
         $.log(`您选择的是用"@"隔开DdgyWxUrl\n`);
     }
-    if (appUrlArrs.indexOf('?') != -1) {
-        Object.keys(appUrlArrs).forEach((item) => {
-            if (appUrlArrs[item]) {
-                appUrlArr.push(appUrlArrs[item]);
-            }
-        });
-    } else {
-        $.log("DdgyWxUrl错误");
-    }
+    Object.keys(appUrlArrs).forEach((item) => {
+        if (appUrlArrs[item]) {
+            appUrlArr.push(appUrlArrs[item]);
+        }
+    });
     totalUser = appUrlArr.length;
     $.log(`共找到${totalUser}个用户\n`);
     return true;
@@ -77,23 +73,27 @@ async function checkEnv() {
 
 async function getEnvParam(userNum) {
     appUrlArrVal = appUrlArr[userNum];
-    let str = appUrlArrVal.split('?')[1];
-    let str2 = str.split('&');
-    for (let i = 0; i < str2.length; i++) {
-        let str3 = str2[i];
-        if (str3.indexOf('xpsid') != -1) {
-            xpsid = str3.split('=')[1];
-        } else if (str3.indexOf('xoid') != -1) {
-            xoid = str3.split('=')[1];
-        } else if (str3.indexOf('uid') != -1) {
-            uid = str3.split('=')[1];
-        } else if (str3.indexOf('xpsid_root') != -1) {
-            xpsid_root = str3.split('=')[1];
-        } else if (str3.indexOf('token') != -1) {
-            token = str3.split('=')[1];
-        } else if (str3.indexOf('wsgsig') != -1) {
-            wsgsig = str3.split('=')[1];
+    if (appUrlArrs.indexOf('?') != -1) {
+        let str = appUrlArrVal.split('?')[1];
+        let str2 = str.split('&');
+        for (let i = 0; i < str2.length; i++) {
+            let str3 = str2[i];
+            if (str3.indexOf('xpsid') != -1) {
+                xpsid = str3.split('=')[1];
+            } else if (str3.indexOf('xoid') != -1) {
+                xoid = str3.split('=')[1];
+            } else if (str3.indexOf('uid') != -1) {
+                uid = str3.split('=')[1];
+            } else if (str3.indexOf('xpsid_root') != -1) {
+                xpsid_root = str3.split('=')[1];
+            } else if (str3.indexOf('token') != -1) {
+                token = str3.split('=')[1];
+            } else if (str3.indexOf('wsgsig') != -1) {
+                wsgsig = str3.split('=')[1];
+            }
         }
+    } else {
+        $.log("DdgyWxUrl错误");
     }
 }
 
