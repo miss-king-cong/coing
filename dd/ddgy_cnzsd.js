@@ -133,15 +133,15 @@ async function goal() {
         $.post(url, async (err, resp, data) => {
             try {
                 if (err) {
-                    $.log(`刷水滴Api请求失败`);
+                    $.log(`吹牛赚水滴刷水滴Api请求失败`);
                 } else {
-                    data = JSON.parse(data);
-                    if (data.errno == 0) {
-                        $.log(`刷水滴成功` + data.data.water_wallet.cur);
+                    let data2 = JSON.parse(data);
+                    if (data2.errno == 0) {
+                        $.log(`吹牛赚水滴刷水滴成功` + data2.data.water_wallet.cur);
                         await $.wait(2000); //等待2秒
                         await goal();
                     } else {
-                        $.log(data.errmsg);
+                        $.log(`吹牛赚水滴刷水滴` + data.errmsg);
                         await award();
                     }
                 }
@@ -182,10 +182,14 @@ async function award() {
         $.post(url, async (err, resp, data) => {
             try {
                 if (err) {
-                    $.log(`领取水滴Api请求失败`);
+                    $.log(`吹牛赚水滴领水滴Api请求失败`);
                 } else {
-                    data = JSON.parse(data);
-                    $.log(`领取水滴成功`);
+                    let data2 = JSON.parse(data);
+                    if (data2.errno == 0) {
+                        $.log(`吹牛赚水滴领水滴成功`);
+                    } else {
+                        $.log(`吹牛赚水滴领水滴` + data2.errmsg);
+                    }
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -226,9 +230,9 @@ async function heartbeatDog() {
                 if (err) {
                     $.log(`领取化肥Api请求失败`);
                 } else {
-                    data = JSON.parse(data);
-                    if (data.data.fertilizer != 0) {
-                        $.log(`领取化肥成功` + data.data.fertilizer);
+                    let data2 = JSON.parse(data);
+                    if (data2.errno == 0) {
+                        $.log(`领取化肥成功` + data2.data.fertilizer);
                     } else {
                         $.log(`领取化肥次数今日已满`);
                     }
@@ -272,11 +276,11 @@ async function recBucketWater() {
                 if (err) {
                     $.log(`领取水桶水滴Api请求失败`);
                 } else {
-                    data = JSON.parse(data);
-                    if (data.data.rec_water != 0) {
-                        $.log(`领取水桶水滴成功` + data.data.rec_water);
+                    let data2 = JSON.parse(data);
+                    if (data2.errno == 0) {
+                        $.log(`领取水桶水滴成功` + data2.data.rec_water);
                     } else {
-                        $.log(`领取水桶水滴` + data.errmsg);
+                        $.log(`领取水桶水滴` + data2.errmsg);
                     }
                 }
             } catch (e) {
