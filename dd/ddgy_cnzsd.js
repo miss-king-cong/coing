@@ -273,7 +273,7 @@ async function recBucketWater() {
                     $.log(`领取水桶水滴Api请求失败`);
                 } else {
                     data = JSON.parse(data);
-                    if (data.data.fertilizer != 0) {
+                    if (data.data.rec_water != 0) {
                         $.log(`领取水桶水滴成功` + data.data.rec_water);
                     } else {
                         $.log(`领取水桶水滴` + data.errmsg);
