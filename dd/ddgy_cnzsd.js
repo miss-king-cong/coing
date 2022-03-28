@@ -229,7 +229,6 @@ async function heartbeatDog() {
                     data = JSON.parse(data);
                     if (data.data.fertilizer != 0) {
                         $.log(`领取化肥成功` + data.data.fertilizer);
-                        await heartbeatDog();
                     } else {
                         $.log(`领取化肥次数今日已满`);
                     }
