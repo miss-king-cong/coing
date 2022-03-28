@@ -141,7 +141,7 @@ async function goal() {
                         await $.wait(2000); //等待2秒
                         await goal();
                     } else {
-                        $.log(`吹牛赚水滴刷水滴` + data.errmsg);
+                        $.log(`吹牛赚水滴刷水滴` + data2.errmsg);
                         await award();
                     }
                 }
