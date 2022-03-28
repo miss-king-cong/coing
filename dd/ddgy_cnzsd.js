@@ -3,17 +3,17 @@
 ============Quantumultx===============
 [task_local]
 #滴滴果园吹牛赚水滴
-00 00 08 * * * jd_speed_sign.js, tag=滴滴果园吹牛赚水滴, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+00 00 0,2,4,6,8,10,12,14,16,18,20,22 * * * jd_speed_sign.js, tag=滴滴果园吹牛赚水滴, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "00 00 08 * * *" script-path=jd_speed_sign.js,tag=滴滴果园吹牛赚水滴
+cron "00 00 0,2,4,6,8,10,12,14,16,18,20,22 * * *" script-path=jd_speed_sign.js,tag=滴滴果园吹牛赚水滴
 
 ===============Surge=================
-滴滴果园吹牛赚水滴 = type=cron,cronexp="00 00 08 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
+滴滴果园吹牛赚水滴 = type=cron,cronexp="00 00 0,2,4,6,8,10,12,14,16,18,20,22 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
 
 ============小火箭=========
-滴滴果园吹牛赚水滴 = type=cron,script-path=jd_speed_sign.js, cronexpr="00 00 08 * * *", timeout=33600, enable=true
+滴滴果园吹牛赚水滴 = type=cron,script-path=jd_speed_sign.js, cronexpr="00 00 0,2,4,6,8,10,12,14,16,18,20,22 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('滴滴果园吹牛赚水滴');
@@ -99,6 +99,8 @@ async function initAccountInfo() {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
         await goal();
+        await heartbeatDog();
+        await recBucketWater();
         await $.wait(5000); //等待5秒
     }
 }
@@ -184,6 +186,99 @@ async function award() {
                 } else {
                     data = JSON.parse(data);
                     $.log(`领取水滴成功`);
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//狗狗在线2分钟领化肥
+async function heartbeatDog() {
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://game.xiaojukeji.com/api/game/plant/heartbeatDog?wsgsig=${wsgsig}`,
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'D-Header-T': `${token}`
+            },
+            body: JSON.stringify({
+                "xbiz": "240301",
+                "prod_key": "didi-orchard",
+                "xpsid": `${xpsid}`,
+                "dchn": "EpjLe00",
+                "xoid": `${xoid}`,
+                "uid": `${uid}`,
+                "xenv": "wxmp",
+                "xspm_from": "none.none.none.none",
+                "xpsid_root": `${xpsid_root}`,
+                "xpsid_from": "",
+                "xpsid_share": "",
+                "platform": 1,
+                "token": `${token}`
+            }),
+        };
+        $.post(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`领取化肥Api请求失败`);
+                } else {
+                    data = JSON.parse(data);
+                    if (data.data.fertilizer != 0) {
+                        $.log(`领取化肥成功` + data.data.fertilizer);
+                        await heartbeatDog();
+                    } else {
+                        $.log(`领取化肥次数今日已满`);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//领取水桶水滴
+async function recBucketWater() {
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://game.xiaojukeji.com/api/game/plant/recBucketWater?wsgsig=${wsgsig}`,
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'D-Header-T': `${token}`
+            },
+            body: JSON.stringify({
+                "xbiz": "240301",
+                "prod_key": "didi-orchard",
+                "xpsid": `${xpsid}`,
+                "dchn": "EpjLe00",
+                "xoid": `${xoid}`,
+                "uid": `${uid}`,
+                "xenv": "wxmp",
+                "xspm_from": "none.none.none.none",
+                "xpsid_root": `${xpsid_root}`,
+                "xpsid_from": "",
+                "xpsid_share": "",
+                "platform": 1,
+                "token": `${token}`
+            }),
+        };
+        $.post(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`领取水桶水滴Api请求失败`);
+                } else {
+                    data = JSON.parse(data);
+                    if (data.data.fertilizer != 0) {
+                        $.log(`领取水桶水滴成功` + data.data.rec_water);
+                    } else {
+                        $.log(`领取水桶水滴` + data.errmsg);
+                    }
                 }
             } catch (e) {
                 $.logErr(e, resp);
