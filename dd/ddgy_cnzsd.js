@@ -101,6 +101,7 @@ async function initAccountInfo() {
         await goal();
         await heartbeatDog();
         await recBucketWater();
+        await sign();
         await $.wait(5000); //等待5秒
     }
 }
@@ -281,6 +282,52 @@ async function recBucketWater() {
                         $.log(`领取水桶水滴成功` + data2.data.rec_water);
                     } else {
                         $.log(`领取水桶水滴` + data2.errmsg);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//签到
+async function sign() {
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://game.xiaojukeji.com/api/game/plant/sign?wsgsig=${wsgsig}`,
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'D-Header-T': `${token}`
+            },
+            body: JSON.stringify({
+                "xbiz": "240301",
+                "prod_key": "didi-orchard",
+                "xpsid": `${xpsid}`,
+                "dchn": "EpjLe00",
+                "xoid": `${xoid}`,
+                "uid": `${uid}`,
+                "xenv": "wxmp",
+                "xspm_from": "none.none.none.none",
+                "xpsid_root": `${xpsid_root}`,
+                "xpsid_from": "",
+                "xpsid_share": "",
+                "platform": 1,
+                "token": `${token}`
+            }),
+        };
+        $.post(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`签到Api请求失败`);
+                } else {
+                    let data2 = JSON.parse(data);
+                    if (data2.errno == 0) {
+                        $.log(`签到成功` + data2.data.rewards[0].name + data2.data.rewards[0].num);
+                    } else {
+                        $.log(`签到失败` + data2.errmsg);
                     }
                 }
             } catch (e) {
