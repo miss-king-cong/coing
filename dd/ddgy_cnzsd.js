@@ -3,17 +3,17 @@
 ============Quantumultx===============
 [task_local]
 #滴滴果园吹牛赚水滴
-00 00 0,2,4,6,8,10,12,14,16,18,20,22 * * * jd_speed_sign.js, tag=滴滴果园吹牛赚水滴, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+00 00 0,5,10,15,20 * * * jd_speed_sign.js, tag=滴滴果园吹牛赚水滴, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "00 00 0,2,4,6,8,10,12,14,16,18,20,22 * * *" script-path=jd_speed_sign.js,tag=滴滴果园吹牛赚水滴
+cron "00 00 0,5,10,15,20 * * *" script-path=jd_speed_sign.js,tag=滴滴果园吹牛赚水滴
 
 ===============Surge=================
-滴滴果园吹牛赚水滴 = type=cron,cronexp="00 00 0,2,4,6,8,10,12,14,16,18,20,22 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
+滴滴果园吹牛赚水滴 = type=cron,cronexp="00 00 0,5,10,15,20 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
 
 ============小火箭=========
-滴滴果园吹牛赚水滴 = type=cron,script-path=jd_speed_sign.js, cronexpr="00 00 0,2,4,6,8,10,12,14,16,18,20,22 * * *", timeout=33600, enable=true
+滴滴果园吹牛赚水滴 = type=cron,script-path=jd_speed_sign.js, cronexpr="00 00 0,5,10,15,20 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('滴滴果园吹牛赚水滴');
