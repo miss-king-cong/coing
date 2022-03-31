@@ -16,14 +16,14 @@ export ddgyToken='uid&token'
 ============Quantumultx===============
 [task_local]
 #滴滴果园
-28 0,8,12,18 * * * https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js, tag=滴滴果园, enabled=true
+48 8,12,18 * * * https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js, tag=滴滴果园, enabled=true
 ================Loon==============
 [Script]
-cron "28 0,8,12,18 * * *" script-path=https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js,tag=滴滴果园
+cron "48 8,12,18 * * *" script-path=https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js,tag=滴滴果园
 ===============Surge=================
-滴滴果园 = type=cron,cronexp="28 0,8,12,18 * * *",wake-system=1,timeout=3600,script-path=https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js
+滴滴果园 = type=cron,cronexp="48 8,12,18 * * *",wake-system=1,timeout=3600,script-path=https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js
 ============小火箭=========
-滴滴果园 = type=cron,script-path=https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js, cronexpr="28 0,8,12,18 * * *", timeout=3600, enable=true
+滴滴果园 = type=cron,script-path=https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js, cronexpr="48 8,12,18 * * *", timeout=3600, enable=true
 [rewrite_local]
 https://game.xiaojukeji.com/api/game/plant/enter url script-request-body https://git.lspsp.workers.dev/https://raw.githubusercontent.com/miss-king-cong/coing/main/dd/ddgy.js
 [MITM]
