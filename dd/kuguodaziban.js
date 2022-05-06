@@ -21,7 +21,7 @@ var appUrlArr = [];
 var userid = '';
 var androidId = '';
 var token = '';
-var KgdzbUrl="";
+var KgdzbUrl = "";
 const md5key = "OdwECfmgDSiXVrkR3JURLNDhvhZF4w6f";
 const md5keyh5 = "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt";
 
@@ -57,6 +57,8 @@ async function checkEnv() {
     } else if (KgdzbUrl.indexOf('@') != -1) {
         appUrlArrs = KgdzbUrl.split('@');
         $.log(`您选择的是用"@"隔开KgdzbUrl\n`);
+    } else {
+        appUrlArrs = KgdzbUrl;
     }
     Object.keys(appUrlArrs).forEach((item) => {
         if (appUrlArrs[item]) {
