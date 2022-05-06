@@ -7,7 +7,7 @@ var token = '';
 var KgdzbUrl="";
 const md5key = "OdwECfmgDSiXVrkR3JURLNDhvhZF4w6f";
 const md5keyh5 = "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt";
-
+$.log(`开始检测环境变量`);
 !(async () => {
     //检查环境变量
     $.log(`开始检测环境变量`);
