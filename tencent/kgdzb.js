@@ -1,20 +1,3 @@
-/*
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-============Quantumultx===============
-[task_local]
-#酷狗大字版
-00 00 8 * * * jd_speed_sign.js, tag=酷狗大字版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
-
-================Loon==============
-[Script]
-cron "00 00 8 * * *" script-path=jd_speed_sign.js,tag=酷狗大字版
-
-===============Surge=================
-酷狗大字版 = type=cron,cronexp="00 00 8 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
-
-============小火箭=========
-酷狗大字版 = type=cron,script-path=jd_speed_sign.js, cronexpr="00 00 8 * * *", timeout=33600, enable=true
-*/
 
 const $ = new Env('酷狗大字版');
 var appUrlArr = [];
