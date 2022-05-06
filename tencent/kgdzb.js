@@ -21,11 +21,13 @@ var appUrlArr = [];
 var userid = '';
 var androidId = '';
 var token = '';
+var KgdzbUrl="";
 const md5key = "OdwECfmgDSiXVrkR3JURLNDhvhZF4w6f";
 const md5keyh5 = "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt";
 
 !(async () => {
     //检查环境变量
+    $.log(`开始检测环境变量`);
     if (!(await checkEnv())) {
         return;
     } else {
@@ -38,7 +40,6 @@ const md5keyh5 = "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt";
 async function checkEnv() {
     if ($.isNode()) {
         KgdzbUrl = process.env.KgdzbUrl;
-
     } else {
         KgdzbUrl = $.getdata('KgdzbUrl');
     }
