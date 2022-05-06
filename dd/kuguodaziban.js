@@ -58,7 +58,7 @@ async function checkEnv() {
         appUrlArrs = KgdzbUrl.split('@');
         $.log(`您选择的是用"@"隔开KgdzbUrl\n`);
     } else {
-        appUrlArrs = KgdzbUrl;
+        appUrlArrs = [KgdzbUrl];
     }
     Object.keys(appUrlArrs).forEach((item) => {
         if (appUrlArrs[item]) {
