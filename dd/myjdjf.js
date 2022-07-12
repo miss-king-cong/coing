@@ -130,7 +130,7 @@ async function sign_component_page() {
 }
 
 //获取getToken
-async function getTokenNew(key) {
+async function getToken(key) {
     let timestamp = Date.now();
     return new Promise((resolve) => {
         let url = {
