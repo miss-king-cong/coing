@@ -19,7 +19,7 @@ cron "00 00 8 * * *" script-path=jd_speed_sign.js,tag=公众号明宇酒店商�
 const $ = new Env('公众号明宇酒店商城积分');
 var appUrlArr = [];
 var activityId = '';
-var Cookie = '';
+var Cookie2 = '';
 var MyjdUrl = "";
 
 !(async () => {
@@ -73,9 +73,7 @@ async function getEnvParam(userNum) {
         let str = appUrlArrVal;
         let str2 = str.split('&');
         activityId = str2[0];
-        $.log(activityId);
-        Cookie = str2[1];
-        $.log(Cookie);
+        Cookie2 = str2[1];
     } else {
         $.log("MyjdUrl错误");
     }
@@ -108,12 +106,13 @@ function object2query3(t) {
 //签到
 //打开签到页面
 async function sign_component_page() {
+    $.log("https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}");
     return new Promise((resolve) => {
         let url = {
             url: "https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}",
             headers: {
                 "Referer": "https://myjd.activity-13.m.duiba.com.cn/chw/visual-editor/skins?id=143983&from=login&spm=78412.1.1.1",
-                "Cookie": `${Cookie}`
+                "Cookie": `${Cookie2}`
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -149,7 +148,7 @@ async function getTokenNew(key) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 "Referer": "https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}",
-                "Cookie": `${Cookie}`
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -187,7 +186,7 @@ async function sign_component_doSign(token) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 "Referer": "https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}",
-                "Cookie": `${Cookie}`
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -222,7 +221,7 @@ async function sign_component_signResult(orderNum) {
             url: "https://myjd.activity-13.m.duiba.com.cn/sign/component/signResult?orderNum=${orderNum}&_=${timestamp}",
             headers: {
                 "Referer": "https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}",
-                "Cookie": `${Cookie}`
+                "Cookie": `${Cookie2}`
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -255,7 +254,7 @@ async function hdtool_index() {
             url: "https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${activityId}&dbnewopen",
             headers: {
                 "Referer": "https://myjd.activity-13.m.duiba.com.cn/chw/visual-editor/skins?id=144390",
-                "Cookie": `${Cookie}`
+                "Cookie": `${Cookie2}`
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -291,7 +290,7 @@ async function getTokenNew(key) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 "Referer": "https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${activityId}&dbnewopen",
-                "Cookie": `${Cookie}`
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -329,7 +328,7 @@ async function hdtool_doJoin(token) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 "Referer": "https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${activityId}&dbnewopen",
-                "Cookie": `${Cookie}`
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -366,7 +365,7 @@ async function hdtool_getOrderStatus(orderId) {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 "Referer": "https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${activityId}&dbnewopen",
-                "Cookie": `${Cookie}`
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
