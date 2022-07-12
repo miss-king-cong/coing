@@ -192,7 +192,7 @@ async function sign_component_doSign(token) {
                         await $.wait(5000); //等待5秒
                         await sign_component_signResult(orderNum);
                     } else {
-                        $.log(`签到` + data2.message);
+                        $.log(`签到` + data2.desc);
                     }
                 }
             } catch (e) {
