@@ -84,7 +84,9 @@ async function initAccountInfo() {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
         await sign_component_page();
+        await $.wait(30000); //等待30秒
         await hdtool_index();
+        await $.wait(30000); //等待30秒
     }
 }
 
