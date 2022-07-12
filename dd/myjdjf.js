@@ -74,11 +74,8 @@ async function getEnvParam(userNum) {
         let str2 = str.split('&');
         for (let i = 0; i < str2.length; i++) {
             let str3 = str2[i];
-            if (str3.indexOf('activityId') != -1) {
-                activityId = str3.split('=')[1];
-            } else if (str3.indexOf('Cookie') != -1) {
-                Cookie = str3.split('=')[1];
-            }
+            activityId = str3[0];
+            Cookie = str3[1];
         }
     } else {
         $.log("MyjdUrl错误");
