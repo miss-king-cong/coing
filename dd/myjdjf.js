@@ -18,7 +18,6 @@ cron "00 00 8 * * *" script-path=jd_speed_sign.js,tag=公众号明宇酒店商�
 
 const $ = new Env('公众号明宇酒店商城积分');
 var appUrlArr = [];
-var activityId = '';
 var Cookie2 = '';
 var MyjdUrl = "";
 
@@ -69,14 +68,7 @@ async function checkEnv() {
 
 async function getEnvParam(userNum) {
     let appUrlArrVal = appUrlArr[userNum];
-    if (appUrlArrVal.indexOf('&') != -1) {
-        let str = appUrlArrVal;
-        let str2 = str.split('&');
-        activityId = str2[0];
-        Cookie2 = str2[1];
-    } else {
-        $.log("MyjdUrl错误");
-    }
+    Cookie2 = appUrlArrVal;
 }
 
 async function initAccountInfo() {
@@ -84,9 +76,7 @@ async function initAccountInfo() {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
         await sign_component_page();
-        await $.wait(30000); //等待30秒
         await hdtool_index();
-        await $.wait(30000); //等待30秒
     }
 }
 
@@ -110,7 +100,7 @@ function object2query3(t) {
 async function sign_component_page() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}`,
+            url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=165034683866431`,
             headers: {
                 "Referer": `https://myjd.activity-13.m.duiba.com.cn/chw/visual-editor/skins?id=143983&from=login&spm=78412.1.1.1`,
                 "Cookie": `${Cookie2}`
@@ -148,7 +138,7 @@ async function getTokenNew(key) {
             body: `timestamp=${timestamp}`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=165034683866431`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -183,10 +173,10 @@ async function sign_component_doSign(token) {
     return new Promise((resolve) => {
         let url = {
             url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/doSign?_=${timestamp}`,
-            body: `signOperatingId=${activityId}&token=${token}`,
+            body: `signOperatingId=165034683866431&token=${token}`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=165034683866431`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -221,7 +211,7 @@ async function sign_component_signResult(orderNum) {
         let url = {
             url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/signResult?orderNum=${orderNum}&_=${timestamp}`,
             headers: {
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${activityId}`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=165034683866431`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -252,7 +242,7 @@ async function sign_component_signResult(orderNum) {
 async function hdtool_index() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${activityId}&dbnewopen`,
+            url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=168842451874861&dbnewopen`,
             headers: {
                 "Referer": `https://myjd.activity-13.m.duiba.com.cn/chw/visual-editor/skins?id=144390`,
                 "Cookie": `${Cookie2}`
@@ -287,10 +277,10 @@ async function getTokenNew(key) {
     return new Promise((resolve) => {
         let url = {
             url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/ctoken/getTokenNew`,
-            body: `timestamp=${timestamp}&activityId=${activityId}&activityType=hdtool&consumerId=3833113361`,
+            body: `timestamp=${timestamp}&activityId=168842451874861&activityType=hdtool&consumerId=3833113361`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${activityId}&dbnewopen`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=168842451874861&dbnewopen`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -324,11 +314,11 @@ async function hdtool_doJoin(token) {
     let timestamp = Date.now();
     return new Promise((resolve) => {
         let url = {
-            url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/doJoin?dpm=78412.3.1.0&activityId=${activityId}&_=${timestamp}`,
-            body: `actId=${activityId}&oaId=${activityId}&activityType=hdtool&consumerId=3833113361&token=${token}`,
+            url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/doJoin?dpm=78412.3.1.0&activityId=168842451874861&_=${timestamp}`,
+            body: `actId=168842451874861&oaId=168842451874861&activityType=hdtool&consumerId=3833113361&token=${token}`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${activityId}&dbnewopen`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=168842451874861&dbnewopen`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -365,7 +355,7 @@ async function hdtool_getOrderStatus(orderId) {
             body: `orderId=${orderId}&adslotId=`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${activityId}&dbnewopen`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=168842451874861&dbnewopen`,
                 "Cookie": `${Cookie2}`
             }
         };
