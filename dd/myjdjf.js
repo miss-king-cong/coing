@@ -72,11 +72,10 @@ async function getEnvParam(userNum) {
     if (appUrlArrVal.indexOf('&') != -1) {
         let str = appUrlArrVal;
         let str2 = str.split('&');
-        for (let i = 0; i < str2.length; i++) {
-            let str3 = str2[i];
-            activityId = str3[0];
-            Cookie = str3[1];
-        }
+        activityId = str2[0];
+        $.log(activityId);
+        Cookie = str2[1];
+        $.log(Cookie);
     } else {
         $.log("MyjdUrl错误");
     }
