@@ -272,7 +272,7 @@ async function queryRedPacketTaskList() {
 //完成执行任务
 async function userBrowse(taskId, taskName) {
     return new Promise((resolve) => {
-        let userBrowsedata == JSON.stringify({
+        let userBrowsedata = JSON.stringify({
             "activityId": `${taskActivityId}`,
             "taskId": `${taskId}`,
             "stayTime": "15",
