@@ -219,7 +219,7 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
         });
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
-            body: `{"activityId":"LHB2207080031","taskActivityId":20201330}`,
+            body: `body={"activityId":"LHB2207080031","taskActivityId":20201330}`,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
                 "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
