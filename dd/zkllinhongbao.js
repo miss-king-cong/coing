@@ -20,8 +20,6 @@ const $ = new Env('真快乐领红包');
 var appUrlArr = [];
 var Cookie2 = '';
 var ZklUrl = "";
-var activityId = "";
-var taskActivityId = "";
 
 !(async () => {
     //检查环境变量
@@ -81,8 +79,6 @@ async function initAccountInfo() {
         //await signinfo();
         //await $.wait(5000); //等待5秒
         await queryRedPacketActivityInfo();
-        await $.wait(5000); //等待5秒
-        await queryRedPacketTaskList();
         await $.wait(5000); //等待5秒
     }
 }
@@ -203,8 +199,10 @@ async function queryRedPacketActivityInfo() {
                 } else {
                     let html = JSON.parse(data);
                     if (html.code == 200) {
-                        activityId = html.data.activityId;
-                        taskActivityId = html.data.taskActivityId;
+                        let activityId = html.data.activityId;
+                        let taskActivityId = html.data.taskActivityId;
+                        await $.wait(5000); //等待5秒
+                        await queryRedPacketTaskList(activityId, taskActivityId);
                     } else {
                         $.log(`获取任务列表关键函数` + html.message);
                     }
@@ -219,13 +217,12 @@ async function queryRedPacketActivityInfo() {
 }
 
 //打开任务列表
-async function queryRedPacketTaskList() {
+async function queryRedPacketTaskList(activityId, taskActivityId) {
     return new Promise((resolve) => {
         let queryRedPacketTaskListdata = JSON.stringify({
             "activityId": `${activityId}`,
             "taskActivityId": `${taskActivityId}`
         });
-        $.log(queryRedPacketTaskListdata);
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
             body: `body=${queryRedPacketTaskListdata}`,
@@ -254,13 +251,13 @@ async function queryRedPacketTaskList() {
                             let status = tasks[i].status;
                             if (status == 1) {
                                 await $.wait(15000); //等待15秒
-                                await userBrowse(taskId, taskName);
+                                await userBrowse(activityId, taskActivityId, taskId, taskName);
                             } else if (status == 2) {
 
                             } else if (status == 3) {
                                 $.log(`打开任务列表 ${taskName} 已经完成`);
                             } else if (status == 4) {
-                                await toOpenTaskPrize(taskId, taskName);
+                                await toOpenTaskPrize(activityId, taskActivityId, taskId, taskName);
                             }
                         }
                     } else {
@@ -277,7 +274,7 @@ async function queryRedPacketTaskList() {
 }
 
 //完成执行任务
-async function userBrowse(taskId, taskName) {
+async function userBrowse(activityId, taskActivityId, taskId, taskName) {
     return new Promise((resolve) => {
         let userBrowsedata = JSON.stringify({
             "activityId": `${taskActivityId}`,
@@ -306,7 +303,7 @@ async function userBrowse(taskId, taskName) {
                     if (html.code == 200) {
                         $.log(`完成执行任务${taskName}成功`);
                         await $.wait(5000); //等待5秒
-                        await toOpenTaskPrize(taskId, taskName);
+                        await toOpenTaskPrize(activityId, taskActivityId, taskId, taskName);
                     } else {
                         $.log(`完成执行任务${taskName}` + html.message);
                     }
@@ -321,7 +318,7 @@ async function userBrowse(taskId, taskName) {
 }
 
 //领取任务红包
-async function toOpenTaskPrize(taskId, taskName) {
+async function toOpenTaskPrize(activityId, taskActivityId, taskId, taskName) {
     return new Promise((resolve) => {
         let toOpenTaskPrizedata = JSON.stringify({
             "taskId": `${taskId}`,
