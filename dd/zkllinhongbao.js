@@ -76,8 +76,8 @@ async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
-        //await signinfo();
-        //await $.wait(5000); //等待5秒
+        await signinfo();
+        await $.wait(5000); //等待5秒
         await queryRedPacketActivityInfo();
         await $.wait(5000); //等待5秒
     }
@@ -104,11 +104,8 @@ async function signinfo() {
         let url = {
             url: `https://mobile.gome.com.cn/wap/meidouMall/redpkg/signinfo?activityFlag=0`,
             headers: {
-                "origin": "https://topic.m.gome.com.cn",
-                "user-agent": "Mozilla/5.0 (Linux; Android 9; ELE-AL00 Build/HUAWEIELE-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 /gomeplus/255/910350728339241/A015/9/WIFI/1080*2265/gome/",
-                "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "cookie": `${Cookie2}`,
-                "x-requested-with": "com.gome.eshopnew"
+                "Referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
+                "Cookie": `${Cookie2}`
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -148,8 +145,8 @@ async function signin() {
         let url = {
             url: `https://mobile.gome.com.cn/wap/meidouMall/redpkg/signin?activityFlag=0`,
             headers: {
-                "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "cookie": `${Cookie2}`
+                "Referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
+                "Cookie": `${Cookie2}`
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -182,8 +179,8 @@ async function queryRedPacketActivityInfo() {
             body: `body={}`,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
-                "referer": "https://topic.m.gome.com.cn/quids_red_packet.html",
-                "cookie": `${Cookie2}`
+                "Referer": "https://topic.m.gome.com.cn/quids_red_packet.html",
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -192,7 +189,7 @@ async function queryRedPacketActivityInfo() {
                     $.log(`获取任务列表关键函数Api请求失败`);
                 } else {
                     let html = JSON.parse(data);
-                    if (html.status == 200) {
+                    if (html.code == 200) {
                         let activityId = html.data.activityId;
                         let taskActivityId = html.data.taskActivityId;
                         await $.wait(5000); //等待5秒
@@ -219,67 +216,11 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
         });
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
-            body: `body={"activityId":"LHB2207080031","taskActivityId":20201330}`,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "Referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "Cookie": "ads=0; global_key=e2cadee984454a258b6f7f7579dd25f2; route=c0e09c5184abf68ee20fb2a0114d6f3f; uid=CmoFYGLdU9yfPRcoBcBeAg==; global_key=e2cadee984454a258b6f7f7579dd25f2; ssaa=51385f690b3d42ca9397b43ae454d8f6; ufpd=559b25b7a08be1a1d360d231b3e0d31d2e8b7937bd45e5cfbc1cfe2e93b658ceae42187c66e628930aa67152f349aeff92474f377b7848155dff1f2acdb5ae87|62dd53dfrSrIUmVatxQQYYvhe4dpdnKIQDSBzqb1; SCN=NICD0w17dkGw4DE50rJ7%2FwNZd2hXf65wLXc%2BdlH3o9bJYpFlaSDfitF%2B0lbHz71TSfq1Jz8turfKkGA%2FJQa%2Fp%2FbMl3S5fzNqX1ybMH%2BzDmQc8WU9JL1eyQ%3D%3D072f13a82c743c06477697bb3ad96e0f; DYN_USER_ID=86240601930; gradeId=G2; DYN_USER_CONFIRM=NICD0w17dkGw4DE50rJ7%2FwNZd2hXf65wLXc%2BdlH3o9bJYpFlaSDfitF%2B0lbHz71TSfq1Jz8turfKkGA%2FJQa%2Fp%2FbMl3S5fzNqX1ybMH%2BzDmQc8WU9JL1eyQ%3D%3D072f13a82c743c06477697bb3ad96e0f; SSO_USER_ID=86240601930; __ugk=4fc4f9cbd6f4408982a0e5b6f8e3bed5; __uls=Y; __unick=gm_156%255E_%255E2186fhoc; gpid=11000000; gcid=11010000; gdid=11010200; gtid=110102002; organizationId=1001; gpName=%E5%8C%97%E4%BA%AC; gcName=%E5%8C%97%E4%BA%AC%E5%B8%82; gdName=%E6%9C%9D%E9%98%B3%E5%8C%BA; gtName=%E6%9C%9D%E5%A4%96%E8%A1%97%E9%81%93; addr_lng=116.44901575951573; addr_lat=39.92654605581156; atgregion=74010700%7C%E9%87%8D%E5%BA%86%E9%87%8D%E5%BA%86%E5%B8%82%E6%B8%9D%E4%B8%AD%E5%8C%BA%E5%A4%A7%E6%BA%AA%E6%B2%9F%E8%A1%97%E9%81%93%7C74010000%7C74000000%7C740107004; atgregionCity=%E9%87%8D%E5%BA%86%E5%B8%82; cartnum=0_0-1_0; DSESSIONID=d77f285cbcc549f0967be4777102bd83; ctx=app-shangcheng|ver-v7.0.0|plt-wap|cmpid-seo_m.baidu.com_%E6%97%A0; http_referer=https%3A%2F%2Ftopic.m.gome.com.cn%2Fquids_red_packet.html; sensorsdata2015jssdkcross=%7B%22distinct_id%22%3A%2286240601930%22%2C%22first_id%22%3A%22182308f9152176-08d94d2fb0371-3a136656-280800-182308f915321%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%2C%22_latest_cmpid%22%3A%22seo_m.baidu.com_%E6%97%A0%22%7D%2C%22%24device_id%22%3A%22182308f9152176-08d94d2fb0371-3a136656-280800-182308f915321%22%7D; loginStatus=Y; userId=86240601930; nikeName=gm_156%5E_%5E2186fhoc"
-            }
-        };
-        $.post(url, async (err, resp, data) => {
-            try {
-                if (err) {
-                    $.log(`打开任务列表Api请求失败`);
-                } else {
-                    $.log(data);
-                    let html = JSON.parse(data);
-                    if (html.status == 200) {
-                        let tasks = html.data.tasks;
-                        for (let i = 0; i < tasks.length; i++) {
-                            let taskId = tasks[i].taskId;
-                            let taskName = tasks[i].taskName;
-                            let taskType = tasks[i].taskType;
-                            let status = tasks[i].status;
-                            if (status == 1) {
-                                await $.wait(15000); //等待15秒
-                                await userBrowse(activityId, taskActivityId, taskId, taskName);
-                            } else if (status == 2) {
-
-                            } else if (status == 3) {
-                                $.log(`打开任务列表 ${taskName} 已经完成`);
-                            } else if (status == 4) {
-                                await toOpenTaskPrize(activityId, taskActivityId, taskId, taskName);
-                            }
-                        }
-                    } else {
-                        $.log(`打开任务列表` + html.failReason);
-                    }
-                }
-            } catch (e) {
-                $.logErr(e, resp);
-            } finally {
-                resolve();
-            }
-        });
-    });
-}
-
-
-/*
-//打开任务列表
-async function queryRedPacketTaskList(activityId, taskActivityId) {
-    return new Promise((resolve) => {
-        let queryRedPacketTaskListdata = JSON.stringify({
-            "activityId": `${activityId}`,
-            "taskActivityId": `${taskActivityId}`
-        });
-        let url = {
-            url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
             body: `body=${queryRedPacketTaskListdata}`,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
-                "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "cookie": `${Cookie2}`
+                "Referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -289,7 +230,7 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
                 } else {
                     $.log(data);
                     let html = JSON.parse(data);
-                    if (html.status == 200) {
+                    if (html.code == 200) {
                         let tasks = html.data.tasks;
                         for (let i = 0; i < tasks.length; i++) {
                             let taskId = tasks[i].taskId;
@@ -334,8 +275,8 @@ async function userBrowse(activityId, taskActivityId, taskId, taskName) {
             body: `body=${userBrowsedata}`,
             headers: {
                 "Content-Type": 'application/x-www-form-urlencoded',
-                "referer": `https://prom.m.gome.com.cn/gcms/MobsaleKK9rS6Gu27J.html?activityId=${taskActivityId}&taskId=${taskId}&times=15&type=2&rewardNum=&isShowTask=true&activityType=15`,
-                "cookie": `${Cookie2}`
+                "Referer": `https://prom.m.gome.com.cn/gcms/MobsaleKK9rS6Gu27J.html?activityId=${taskActivityId}&taskId=${taskId}&times=15&type=2&rewardNum=&isShowTask=true&activityType=15`,
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -344,7 +285,7 @@ async function userBrowse(activityId, taskActivityId, taskId, taskName) {
                     $.log(`完成执行任务Api请求失败`);
                 } else {
                     let html = JSON.parse(data);
-                    if (html.status == 200) {
+                    if (html.code == 200) {
                         $.log(`完成执行任务${taskName}成功`);
                         await $.wait(5000); //等待5秒
                         await toOpenTaskPrize(activityId, taskActivityId, taskId, taskName);
@@ -374,8 +315,8 @@ async function toOpenTaskPrize(activityId, taskActivityId, taskId, taskName) {
             body: `body=${toOpenTaskPrizedata}`,
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
-                "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "cookie": `${Cookie2}`
+                "Referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
+                "Cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -384,7 +325,7 @@ async function toOpenTaskPrize(activityId, taskActivityId, taskId, taskName) {
                     $.log(`领取任务红包Api请求失败`);
                 } else {
                     let html = JSON.parse(data);
-                    if (html.status == 200) {
+                    if (html.code == 200) {
                         let prizeContent = html.data.prizeContent;
                         $.log(`领取任务红包${taskName}获得` + prizeContent + `元`);
                     } else {
@@ -710,7 +651,7 @@ function Env(t, e) {
             return this.isSurge() || this.isLoon() ? $persistentStore.write(t, e) : this.isQuanX() ? $prefs.setValueForKey(t, e) : this.isNode() ? (this.data = this.loaddata(), this.data[e] = t, this.writedata(), !0) : this.data && this.data[e] || null;
         }
         initGotEnv(t) {
-            this.got = this.got ? this.got : require("got"), this.cktough = this.cktough ? this.cktough : require("tough-cookie"), this.ckjar = this.ckjar ? this.ckjar : new this.cktough.CookieJar, t && (t.headers = t.headers ? t.headers : {}, void 0 === t.headers.Cookie && void 0 === t.cookieJar && (t.cookieJar = this.ckjar));
+            this.got = this.got ? this.got : require("got"), this.cktough = this.cktough ? this.cktough : require("tough-Cookie"), this.ckjar = this.ckjar ? this.ckjar : new this.cktough.CookieJar, t && (t.headers = t.headers ? t.headers : {}, void 0 === t.headers.Cookie && void 0 === t.CookieJar && (t.CookieJar = this.ckjar));
         }
         get(t, e = (() => {})) {
             t.headers && (delete t.headers["Content-Type"], delete t.headers["Content-Length"]), this.isSurge() || this.isLoon() ? (this.isSurge() && this.isNeedRewrite && (t.headers = t.headers || {}, Object.assign(t.headers, {
@@ -734,9 +675,9 @@ function Env(t, e) {
                 }, o);
             }, t => e(t))) : this.isNode() && (this.initGotEnv(t), this.got(t).on("redirect", (t, e) => {
                 try {
-                    if (t.headers["set-cookie"]) {
-                        const s = t.headers["set-cookie"].map(this.cktough.Cookie.parse).toString();
-                        this.ckjar.setCookieSync(s, null), e.cookieJar = this.ckjar;
+                    if (t.headers["set-Cookie"]) {
+                        const s = t.headers["set-Cookie"].map(this.cktough.Cookie.parse).toString();
+                        this.ckjar.setCookieSync(s, null), e.CookieJar = this.ckjar;
                     }
                 } catch (t) {
                     this.logErr(t);
