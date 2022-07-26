@@ -117,6 +117,7 @@ async function signinfo() {
                 if (err) {
                     $.log(`打开签到页面Api请求失败`);
                 } else {
+                    $.log(`打开签到页面` + data);
                     let html = JSON.parse(data);
                     if (html.code == 2000) {
                         let continueDays = html.data.continueDays;
