@@ -213,10 +213,10 @@ async function queryRedPacketActivityInfo() {
 //打开任务列表
 async function queryRedPacketTaskList(activityId, taskActivityId) {
     return new Promise((resolve) => {
-        let queryRedPacketTaskListdata = JSON.stringify({
+        let queryRedPacketTaskListdata = encodeURIComponent(JSON.stringify({
             "activityId": `${activityId}`,
             "taskActivityId": `${taskActivityId}`
-        });
+        }));
         $.log(`body=${queryRedPacketTaskListdata}`);
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
@@ -268,12 +268,12 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
 //完成执行任务
 async function userBrowse(activityId, taskActivityId, taskId, taskName) {
     return new Promise((resolve) => {
-        let userBrowsedata = JSON.stringify({
+        let userBrowsedata = encodeURIComponent(JSON.stringify({
             "activityId": `${taskActivityId}`,
             "taskId": `${taskId}`,
             "stayTime": "15",
             "activityType": "15"
-        });
+        }));
         let url = {
             url: `https://mobile.gome.com.cn/h5/member/activity/stirGroup/userBrowse.jsp`,
             body: `body=${userBrowsedata}`,
@@ -309,11 +309,11 @@ async function userBrowse(activityId, taskActivityId, taskId, taskName) {
 //领取任务红包
 async function toOpenTaskPrize(activityId, taskActivityId, taskId, taskName) {
     return new Promise((resolve) => {
-        let toOpenTaskPrizedata = JSON.stringify({
+        let toOpenTaskPrizedata = encodeURIComponent(JSON.stringify({
             "taskId": `${taskId}`,
             "activityId": `${activityId}`,
             "taskActivityId": `${taskActivityId}`
-        });
+        }));
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/toOpenTaskPrize`,
             body: `body=${toOpenTaskPrizedata}`,
