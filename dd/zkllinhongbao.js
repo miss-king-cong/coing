@@ -223,6 +223,7 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
             "activityId": `${activityId}`,
             "taskActivityId": `${taskActivityId}`
         });
+        $.log(`body=${queryRedPacketTaskListdata}`);
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
             body: `body=${queryRedPacketTaskListdata}`,
