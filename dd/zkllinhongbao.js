@@ -259,7 +259,7 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
             }
         });
     });
-}*/
+}
 
 //完成执行任务
 async function userBrowse(activityId, taskActivityId, taskId, taskName) {
