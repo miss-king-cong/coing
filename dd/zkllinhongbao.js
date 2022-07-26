@@ -181,8 +181,8 @@ async function queryRedPacketActivityInfo() {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketActivityInfo`,
             body: `body={}`,
             headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
+                "Content-Type": "application/x-www-form-urlencoded",
+                "referer": "https://topic.m.gome.com.cn/quids_red_packet.html",
                 "cookie": `${Cookie2}`
             }
         };
@@ -192,13 +192,13 @@ async function queryRedPacketActivityInfo() {
                     $.log(`获取任务列表关键函数Api请求失败`);
                 } else {
                     let html = JSON.parse(data);
-                    if (html.code == 200) {
+                    if (html.status == 200) {
                         let activityId = html.data.activityId;
                         let taskActivityId = html.data.taskActivityId;
                         await $.wait(5000); //等待5秒
                         await queryRedPacketTaskList(activityId, taskActivityId);
                     } else {
-                        $.log(`获取任务列表关键函数` + html.message);
+                        $.log(`获取任务列表关键函数` + html.failReason);
                     }
                 }
             } catch (e) {
@@ -213,16 +213,15 @@ async function queryRedPacketActivityInfo() {
 //打开任务列表
 async function queryRedPacketTaskList(activityId, taskActivityId) {
     return new Promise((resolve) => {
-        let queryRedPacketTaskListdata = encodeURIComponent(JSON.stringify({
+        let queryRedPacketTaskListdata = JSON.stringify({
             "activityId": `${activityId}`,
             "taskActivityId": `${taskActivityId}`
-        }));
-        $.log(`body=${queryRedPacketTaskListdata}`);
+        });
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
             body: `body=${queryRedPacketTaskListdata}`,
             headers: {
-                'content-type': 'application/x-www-form-urlencoded',
+                "Content-Type": "application/x-www-form-urlencoded",
                 "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
                 "cookie": `${Cookie2}`
             }
@@ -234,7 +233,7 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
                 } else {
                     $.log(data);
                     let html = JSON.parse(data);
-                    if (html.code == 200) {
+                    if (html.status == 200) {
                         let tasks = html.data.tasks;
                         for (let i = 0; i < tasks.length; i++) {
                             let taskId = tasks[i].taskId;
@@ -253,7 +252,7 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
                             }
                         }
                     } else {
-                        $.log(`打开任务列表` + html.message);
+                        $.log(`打开任务列表` + html.failReason);
                     }
                 }
             } catch (e) {
@@ -268,17 +267,17 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
 //完成执行任务
 async function userBrowse(activityId, taskActivityId, taskId, taskName) {
     return new Promise((resolve) => {
-        let userBrowsedata = encodeURIComponent(JSON.stringify({
+        let userBrowsedata = JSON.stringify({
             "activityId": `${taskActivityId}`,
             "taskId": `${taskId}`,
             "stayTime": "15",
             "activityType": "15"
-        }));
+        });
         let url = {
             url: `https://mobile.gome.com.cn/h5/member/activity/stirGroup/userBrowse.jsp`,
             body: `body=${userBrowsedata}`,
             headers: {
-                'content-type': 'application/x-www-form-urlencoded',
+                "Content-Type": 'application/x-www-form-urlencoded',
                 "referer": `https://prom.m.gome.com.cn/gcms/MobsaleKK9rS6Gu27J.html?activityId=${taskActivityId}&taskId=${taskId}&times=15&type=2&rewardNum=&isShowTask=true&activityType=15`,
                 "cookie": `${Cookie2}`
             }
@@ -289,12 +288,12 @@ async function userBrowse(activityId, taskActivityId, taskId, taskName) {
                     $.log(`完成执行任务Api请求失败`);
                 } else {
                     let html = JSON.parse(data);
-                    if (html.code == 200) {
+                    if (html.status == 200) {
                         $.log(`完成执行任务${taskName}成功`);
                         await $.wait(5000); //等待5秒
                         await toOpenTaskPrize(activityId, taskActivityId, taskId, taskName);
                     } else {
-                        $.log(`完成执行任务${taskName}` + html.message);
+                        $.log(`完成执行任务${taskName}` + html.failReason);
                     }
                 }
             } catch (e) {
@@ -309,16 +308,16 @@ async function userBrowse(activityId, taskActivityId, taskId, taskName) {
 //领取任务红包
 async function toOpenTaskPrize(activityId, taskActivityId, taskId, taskName) {
     return new Promise((resolve) => {
-        let toOpenTaskPrizedata = encodeURIComponent(JSON.stringify({
+        let toOpenTaskPrizedata = JSON.stringify({
             "taskId": `${taskId}`,
             "activityId": `${activityId}`,
             "taskActivityId": `${taskActivityId}`
-        }));
+        });
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/toOpenTaskPrize`,
             body: `body=${toOpenTaskPrizedata}`,
             headers: {
-                'content-type': 'application/x-www-form-urlencoded',
+                "Content-Type": "application/x-www-form-urlencoded",
                 "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
                 "cookie": `${Cookie2}`
             }
@@ -329,11 +328,11 @@ async function toOpenTaskPrize(activityId, taskActivityId, taskId, taskName) {
                     $.log(`领取任务红包Api请求失败`);
                 } else {
                     let html = JSON.parse(data);
-                    if (html.code == 200) {
+                    if (html.status == 200) {
                         let prizeContent = html.data.prizeContent;
                         $.log(`领取任务红包${taskName}获得` + prizeContent + `元`);
                     } else {
-                        $.log(`领取任务红包${taskName}` + html.message);
+                        $.log(`领取任务红包${taskName}` + html.failReason);
                     }
                 }
             } catch (e) {
