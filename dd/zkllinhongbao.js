@@ -148,11 +148,8 @@ async function signin() {
         let url = {
             url: `https://mobile.gome.com.cn/wap/meidouMall/redpkg/signin?activityFlag=0`,
             headers: {
-                "origin": "https://topic.m.gome.com.cn",
-                "user-agent": "Mozilla/5.0 (Linux; Android 9; ELE-AL00 Build/HUAWEIELE-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 /gomeplus/255/910350728339241/A015/9/WIFI/1080*2265/gome/",
                 "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "cookie": `${Cookie2}`,
-                "x-requested-with": "com.gome.eshopnew"
+                "cookie": `${Cookie2}`
             }
         };
         $.get(url, async (err, resp, data) => {
@@ -185,11 +182,8 @@ async function queryRedPacketActivityInfo() {
             body: `body={}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                "origin": "https://topic.m.gome.com.cn",
-                "user-agent": "Mozilla/5.0 (Linux; Android 9; ELE-AL00 Build/HUAWEIELE-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 /gomeplus/255/910350728339241/A015/9/WIFI/1080*2265/gome/",
                 "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "cookie": `${Cookie2}`,
-                "x-requested-with": "com.gome.eshopnew"
+                "cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -229,11 +223,8 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
             body: `body=${queryRedPacketTaskListdata}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                "origin": "https://topic.m.gome.com.cn",
-                "user-agent": "Mozilla/5.0 (Linux; Android 9; ELE-AL00 Build/HUAWEIELE-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 /gomeplus/255/910350728339241/A015/9/WIFI/1080*2265/gome/",
                 "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "cookie": `${Cookie2}`,
-                "x-requested-with": "com.gome.eshopnew"
+                "cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -288,11 +279,8 @@ async function userBrowse(activityId, taskActivityId, taskId, taskName) {
             body: `body=${userBrowsedata}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                "origin": "https://topic.m.gome.com.cn",
-                "user-agent": "Mozilla/5.0 (Linux; Android 9; ELE-AL00 Build/HUAWEIELE-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 /gomeplus/255/910350728339241/A015/9/WIFI/1080*2265/gome/",
                 "referer": `https://prom.m.gome.com.cn/gcms/MobsaleKK9rS6Gu27J.html?activityId=${taskActivityId}&taskId=${taskId}&times=15&type=2&rewardNum=&isShowTask=true&activityType=15`,
-                "cookie": `${Cookie2}`,
-                "x-requested-with": "com.gome.eshopnew"
+                "cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
@@ -331,11 +319,8 @@ async function toOpenTaskPrize(activityId, taskActivityId, taskId, taskName) {
             body: `body=${toOpenTaskPrizedata}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
-                "origin": "https://topic.m.gome.com.cn",
-                "user-agent": "Mozilla/5.0 (Linux; Android 9; ELE-AL00 Build/HUAWEIELE-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 /gomeplus/255/910350728339241/A015/9/WIFI/1080*2265/gome/",
                 "referer": `https://topic.m.gome.com.cn/quids_red_packet.html`,
-                "cookie": `${Cookie2}`,
-                "x-requested-with": "com.gome.eshopnew"
+                "cookie": `${Cookie2}`
             }
         };
         $.post(url, async (err, resp, data) => {
