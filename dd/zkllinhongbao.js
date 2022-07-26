@@ -216,9 +216,13 @@ async function queryRedPacketActivityInfo() {
 //打开任务列表
 async function queryRedPacketTaskList() {
     return new Promise((resolve) => {
+        let queryRedPacketTaskListdata = JSON.stringify({
+            "activityId": `${activityId}`,
+            "taskActivityId": `${taskActivityId}`
+        });
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
-            body: `body={\"activityId\":\"${activityId}\",\"taskActivityId\":${taskActivityId}}`,
+            body: `body=${queryRedPacketTaskListdata}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 "origin": "https://topic.m.gome.com.cn",
@@ -268,9 +272,15 @@ async function queryRedPacketTaskList() {
 //完成执行任务
 async function userBrowse(taskId, taskName) {
     return new Promise((resolve) => {
+        let userBrowsedata == JSON.stringify({
+            "activityId": `${taskActivityId}`,
+            "taskId": `${taskId}`,
+            "stayTime": "15",
+            "activityType": "15"
+        });
         let url = {
             url: `https://mobile.gome.com.cn/h5/member/activity/stirGroup/userBrowse.jsp`,
-            body: `body={\"activityId\":\"${taskActivityId}\",\"taskId\":\"${taskId}\",\"stayTime\":\"15\",\"activityType\":\"15\"}`,
+            body: `body=${userBrowsedata}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 "origin": "https://topic.m.gome.com.cn",
@@ -305,9 +315,14 @@ async function userBrowse(taskId, taskName) {
 //领取任务红包
 async function toOpenTaskPrize(taskId, taskName) {
     return new Promise((resolve) => {
+        let toOpenTaskPrizedata = JSON.stringify({
+            "taskId": `${taskId}`,
+            "activityId": `${activityId}`,
+            "taskActivityId": `${taskActivityId}`
+        });
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/toOpenTaskPrize`,
-            body: `body={\"taskId\":${taskId},\"activityId\":\"${activityId}\",\"taskActivityId\":${taskActivityId}}`,
+            body: `body=${toOpenTaskPrizedata}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 "origin": "https://topic.m.gome.com.cn",
