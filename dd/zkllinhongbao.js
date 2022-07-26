@@ -69,7 +69,6 @@ async function checkEnv() {
 async function getEnvParam(userNum) {
     let appUrlArrVal = appUrlArr[userNum];
     Cookie2 = appUrlArrVal;
-    $.log(`共找到${Cookie2}个用户\n`);
 }
 
 async function initAccountInfo() {
@@ -113,7 +112,6 @@ async function signinfo() {
                 if (err) {
                     $.log(`打开签到页面Api请求失败`);
                 } else {
-                    $.log(`打开签到页面` + data);
                     let html = JSON.parse(data);
                     if (html.code == 2000) {
                         let continueDays = html.data.continueDays;
@@ -228,7 +226,6 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
                 if (err) {
                     $.log(`打开任务列表Api请求失败`);
                 } else {
-                    $.log(data);
                     let html = JSON.parse(data);
                     if (html.code == 200) {
                         let tasks = html.data.tasks;
@@ -238,14 +235,18 @@ async function queryRedPacketTaskList(activityId, taskActivityId) {
                             let taskType = tasks[i].taskType;
                             let status = tasks[i].status;
                             if (status == 1) {
-                                await $.wait(15000); //等待15秒
-                                await userBrowse(activityId, taskActivityId, taskId, taskName);
+                                if (taskType == 7) {
+                                    await $.wait(15000); //等待15秒
+                                    await userBrowse(activityId, taskActivityId, taskId, taskName);
+                                }
                             } else if (status == 2) {
 
                             } else if (status == 3) {
                                 $.log(`打开任务列表 ${taskName} 已经完成`);
                             } else if (status == 4) {
-                                await toOpenTaskPrize(activityId, taskActivityId, taskId, taskName);
+                                if (taskType == 7) {
+                                    await toOpenTaskPrize(activityId, taskActivityId, taskId, taskName);
+                                }
                             }
                         }
                     } else {
