@@ -71,6 +71,7 @@ async function checkEnv() {
 async function getEnvParam(userNum) {
     let appUrlArrVal = appUrlArr[userNum];
     Cookie2 = appUrlArrVal;
+    $.log(`共找到${Cookie2}个用户\n`);
 }
 
 async function initAccountInfo() {
@@ -224,6 +225,7 @@ async function queryRedPacketTaskList() {
             "activityId": `${activityId}`,
             "taskActivityId": `${taskActivityId}`
         });
+        $.log(queryRedPacketTaskListdata);
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
             body: `body=${queryRedPacketTaskListdata}`,
@@ -241,6 +243,7 @@ async function queryRedPacketTaskList() {
                 if (err) {
                     $.log(`打开任务列表Api请求失败`);
                 } else {
+                    $.log(data);
                     let html = JSON.parse(data);
                     if (html.code == 200) {
                         let tasks = html.data.tasks;
