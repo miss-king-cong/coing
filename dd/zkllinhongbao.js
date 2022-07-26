@@ -218,7 +218,7 @@ async function queryRedPacketTaskList() {
     return new Promise((resolve) => {
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/queryRedPacketTaskList`,
-            body: `body={"activityId":"${activityId}","taskActivityId":${taskActivityId}}`,
+            body: `body={\"activityId\":\"${activityId}\",\"taskActivityId\":${taskActivityId}}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 "origin": "https://topic.m.gome.com.cn",
@@ -270,7 +270,7 @@ async function userBrowse(taskId, taskName) {
     return new Promise((resolve) => {
         let url = {
             url: `https://mobile.gome.com.cn/h5/member/activity/stirGroup/userBrowse.jsp`,
-            body: `body={"activityId":"${taskActivityId}","taskId":"${taskId}","stayTime":"15","activityType":"15"}`,
+            body: `body={\"activityId\":\"${taskActivityId}\",\"taskId\":\"${taskId}\",\"stayTime\":\"15\",\"activityType\":\"15\"}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 "origin": "https://topic.m.gome.com.cn",
@@ -307,7 +307,7 @@ async function toOpenTaskPrize(taskId, taskName) {
     return new Promise((resolve) => {
         let url = {
             url: `https://mobile.gome.com.cn/wap/member/activity/signRedPacket/toOpenTaskPrize`,
-            body: `body={"taskId":${taskId},"activityId":"${activityId}","taskActivityId":${taskActivityId}}`,
+            body: `body={\"taskId\":${taskId},\"activityId\":\"${activityId}\",\"taskActivityId\":${taskActivityId}}`,
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 "origin": "https://topic.m.gome.com.cn",
