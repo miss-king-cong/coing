@@ -78,9 +78,11 @@ async function initAccountInfo() {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
         await signinfo();
+        await $.wait(5000); //等待5秒
         await queryRedPacketActivityInfo();
-        await $.wait(1000); //等待1秒
+        await $.wait(5000); //等待5秒
         await queryRedPacketTaskList();
+        await $.wait(5000); //等待5秒
     }
 }
 
@@ -125,6 +127,7 @@ async function signinfo() {
                         $.log(`已签到` + continueDays + `天 余额` + surplusAmount + `元`);
                         let signFlag = html.data.signFlag;
                         if (signFlag == 0) {
+                            await $.wait(5000); //等待5秒
                             await signin();
                         } else {
                             $.log(`今天已经签到了`);
@@ -247,8 +250,8 @@ async function queryRedPacketTaskList() {
                             let taskType = tasks[i].taskType;
                             let status = tasks[i].status;
                             if (status == 1) {
-                                await userBrowse(taskId, taskName);
                                 await $.wait(15000); //等待15秒
+                                await userBrowse(taskId, taskName);
                             } else if (status == 2) {
 
                             } else if (status == 3) {
@@ -299,6 +302,7 @@ async function userBrowse(taskId, taskName) {
                     let html = JSON.parse(data);
                     if (html.code == 200) {
                         $.log(`完成执行任务${taskName}成功`);
+                        await $.wait(5000); //等待5秒
                         await toOpenTaskPrize(taskId, taskName);
                     } else {
                         $.log(`完成执行任务${taskName}` + html.message);
