@@ -75,8 +75,11 @@ async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
-        await sign_component_page();
-        await hdtool_index();
+        await sign_component_page("165034683866431");
+        await sign_component_page("206344479832606");
+        //await hdtool_index("168842451874861");
+        await hdtool_index("206347762920931");
+        await hdtool_index("206347762920931");
     }
 }
 
@@ -97,10 +100,10 @@ function object2query3(t) {
 
 //签到
 //打开签到页面
-async function sign_component_page() {
+async function sign_component_page(signOperatingId) {
     return new Promise((resolve) => {
         let url = {
-            url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=165034683866431`,
+            url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${signOperatingId}`,
             headers: {
                 "Referer": `https://myjd.activity-13.m.duiba.com.cn/chw/visual-editor/skins?id=143983&from=login&spm=78412.1.1.1`,
                 "Cookie": `${Cookie2}`
@@ -118,7 +121,7 @@ async function sign_component_page() {
                     let htmlx2 = eval(htmlx.substring(htmlx.indexOf("\\u0065\\u0076\\u0061\\u006c") + 24));
                     let key = htmlx2.substring(htmlx2.indexOf("var key = '") + 11);
                     key = key.substring(0, key.indexOf("';"));
-                    await getToken(key);
+                    await getToken(key, signOperatingId);
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -130,7 +133,7 @@ async function sign_component_page() {
 }
 
 //获取getToken
-async function getToken(key) {
+async function getToken(key, signOperatingId) {
     let timestamp = Date.now();
     return new Promise((resolve) => {
         let url = {
@@ -138,7 +141,7 @@ async function getToken(key) {
             body: `timestamp=${timestamp}`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=165034683866431`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${signOperatingId}`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -153,7 +156,7 @@ async function getToken(key) {
                         eval(data2.token);
                         let token = window[key];
                         $.log("获取getToken成功");
-                        await sign_component_doSign(token);
+                        await sign_component_doSign(token, signOperatingId);
                     } else {
                         $.log(`获取getToken错误`);
                     }
@@ -168,15 +171,15 @@ async function getToken(key) {
 }
 
 //开始签到
-async function sign_component_doSign(token) {
+async function sign_component_doSign(token, signOperatingId) {
     let timestamp = Date.now();
     return new Promise((resolve) => {
         let url = {
             url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/doSign?_=${timestamp}`,
-            body: `signOperatingId=165034683866431&token=${token}`,
+            body: `signOperatingId=${signOperatingId}&token=${token}`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=165034683866431`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${signOperatingId}`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -190,7 +193,7 @@ async function sign_component_doSign(token) {
                         $.log(`签到成功`);
                         let orderNum = data2.data.orderNum;
                         await $.wait(5000); //等待5秒
-                        await sign_component_signResult(orderNum);
+                        await sign_component_signResult(orderNum, signOperatingId);
                     } else {
                         $.log(`签到` + data2.desc);
                     }
@@ -205,13 +208,13 @@ async function sign_component_doSign(token) {
 }
 
 //签到结果
-async function sign_component_signResult(orderNum) {
+async function sign_component_signResult(orderNum, signOperatingId) {
     let timestamp = Date.now();
     return new Promise((resolve) => {
         let url = {
             url: `https://myjd.activity-13.m.duiba.com.cn/sign/component/signResult?orderNum=${orderNum}&_=${timestamp}`,
             headers: {
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=165034683866431`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/sign/component/page?signOperatingId=${signOperatingId}`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -239,12 +242,12 @@ async function sign_component_signResult(orderNum) {
 
 //1积分转好礼
 //打开转盘页面
-async function hdtool_index() {
+async function hdtool_index(actId) {
     return new Promise((resolve) => {
         let url = {
-            url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=168842451874861&dbnewopen`,
+            url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${actId}&dbnewopen`,
             headers: {
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/chw/visual-editor/skins?id=144390`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/chw/visual-editor/skins?id=143983&from=login&spm=78412.1.1.1`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -260,7 +263,7 @@ async function hdtool_index() {
                     let htmlx2 = eval(htmlx.substring(htmlx.indexOf("\\u0065\\u0076\\u0061\\u006c") + 24));
                     let key = htmlx2.substring(htmlx2.indexOf("var key = '") + 11);
                     key = key.substring(0, key.indexOf("';"));
-                    await getTokenNew(key);
+                    await getTokenNew(key, actId);
                 }
             } catch (e) {
                 $.logErr(e, resp);
@@ -272,15 +275,15 @@ async function hdtool_index() {
 }
 
 //获取getTokenNew
-async function getTokenNew(key) {
+async function getTokenNew(key, actId) {
     let timestamp = Date.now();
     return new Promise((resolve) => {
         let url = {
             url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/ctoken/getTokenNew`,
-            body: `timestamp=${timestamp}&activityId=168842451874861&activityType=hdtool&consumerId=3833113361`,
+            body: `timestamp=${timestamp}&activityId=${actId}&activityType=hdtool&consumerId=3833113361`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=168842451874861&dbnewopen`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${actId}&dbnewopen`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -295,7 +298,7 @@ async function getTokenNew(key) {
                         eval(data2.token);
                         let token = window[key];
                         $.log("获取getTokenNew成功");
-                        await hdtool_doJoin(token);
+                        await hdtool_doJoin(token, actId);
                     } else {
                         $.log(`获取getTokenNew错误`);
                     }
@@ -310,15 +313,15 @@ async function getTokenNew(key) {
 }
 
 //开始转盘抽奖
-async function hdtool_doJoin(token) {
+async function hdtool_doJoin(token, actId) {
     let timestamp = Date.now();
     return new Promise((resolve) => {
         let url = {
-            url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/doJoin?dpm=78412.3.1.0&activityId=168842451874861&_=${timestamp}`,
-            body: `actId=168842451874861&oaId=168842451874861&activityType=hdtool&consumerId=3833113361&token=${token}`,
+            url: `https://myjd.activity-13.m.duiba.com.cn/hdtool/doJoin?dpm=78412.3.1.0&activityId=${actId}&_=${timestamp}`,
+            body: `actId=${actId}&oaId=${actId}&activityType=hdtool&consumerId=3833113361&token=${token}`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=168842451874861&dbnewopen`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${actId}&dbnewopen`,
                 "Cookie": `${Cookie2}`
             }
         };
@@ -332,7 +335,7 @@ async function hdtool_doJoin(token) {
                         $.log(`转盘抽奖成功`);
                         let orderId = data2.orderId;
                         await $.wait(5000); //等待5秒
-                        await hdtool_getOrderStatus(orderId);
+                        await hdtool_getOrderStatus(orderId, actId);
                     } else {
                         $.log(`转盘抽奖` + data2.message);
                     }
@@ -347,7 +350,7 @@ async function hdtool_doJoin(token) {
 }
 
 //转盘抽奖结果
-async function hdtool_getOrderStatus(orderId) {
+async function hdtool_getOrderStatus(orderId, actId) {
     let timestamp = Date.now();
     return new Promise((resolve) => {
         let url = {
@@ -355,7 +358,7 @@ async function hdtool_getOrderStatus(orderId) {
             body: `orderId=${orderId}&adslotId=`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=168842451874861&dbnewopen`,
+                "Referer": `https://myjd.activity-13.m.duiba.com.cn/hdtool/index?id=${actId}&dbnewopen`,
                 "Cookie": `${Cookie2}`
             }
         };
