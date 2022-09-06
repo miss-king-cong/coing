@@ -188,8 +188,8 @@ async function getUserRewardGoldConisTask() {
                             let data2 = html.data;
                             for (let i = 0; i < data2.length; i++) {
                                 let rewardActivityId = data2[i].rewardActivityId;
-                                let title = data2.title;
-                                let buttonName = data2.buttonName;
+                                let title = data2[i].title;
+                                let buttonName = data2[i].buttonName;
                                 if (buttonName == "已完成") {
                                     $.log(`打开天天任务列表 ` + title + `今日已完成`);
                                 } else {
