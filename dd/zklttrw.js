@@ -187,13 +187,12 @@ async function getUserRewardGoldConisTask() {
                         if (html.isSuccess == "Y") {
                             let data2 = html.data;
                             for (let i = 0; i < data2.length; i++) {
-                                let rewardActivityId = data2.rewardActivityId;
+                                let rewardActivityId = data2[i].rewardActivityId;
                                 let title = data2.title;
                                 let buttonName = data2.buttonName;
                                 if (buttonName == "已完成") {
                                     $.log(`打开天天任务列表 ` + title + `今日已完成`);
                                 } else {
-                                    $.log(`${title} ${rewardActivityId}`);
                                     await match_transpond(title, rewardActivityId);
                                     await $.wait(5000); //等待5秒
                                 }
@@ -217,10 +216,10 @@ async function getUserRewardGoldConisTask() {
 //完成天天任务
 async function match_transpond(title, rewardActivityId) {
     return new Promise((resolve) => {
-        let match_transponddata = encodeURIComponent(JSON.stringify({
+        let match_transponddata = JSON.stringify({
             "activityType": `${rewardActivityId}`,
             "workId": "1803773"
-        }));
+        });
         let url = {
             url: `https://mobile.gome.com.cn/mobile/content/match/transpond`,
             body: `body=${match_transponddata}&sn=a6959c322316289385524323cba288a8b0b60b4c`,
