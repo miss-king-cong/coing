@@ -119,7 +119,7 @@ async function sign_in() {
                         let dou = html.data.dou;
                         $.log(`签到领真快乐豆 获得` + dou + `真快乐豆`);
                     } else {
-                        $.log(`签到领真快乐豆` + html.message);
+                        $.log(`签到领真快乐豆 ` + html.message);
                     }
                 }
             } catch (e) {
@@ -155,7 +155,7 @@ async function sign_doSign() {
                             $.log(`签到领小虎牙币 ` + html.failReason);
                         }
                     } else {
-                        $.log(`签到领小虎牙币` + html.message);
+                        $.log(`签到领小虎牙币 ` + html.message);
                     }
                 }
             } catch (e) {
@@ -193,6 +193,7 @@ async function getUserRewardGoldConisTask() {
                                 if (buttonName == "已完成") {
                                     $.log(`打开天天任务列表 ` + title + `今日已完成`);
                                 } else {
+                                    $.log(`${title} ${rewardActivityId}`);
                                     await match_transpond(title, rewardActivityId);
                                     await $.wait(5000); //等待5秒
                                 }
@@ -201,7 +202,7 @@ async function getUserRewardGoldConisTask() {
                             $.log(`打开天天任务列表 ` + html.failReason);
                         }
                     } else {
-                        $.log(`打开天天任务列表` + html.message);
+                        $.log(`打开天天任务列表 ` + html.message);
                     }
                 }
             } catch (e) {
@@ -216,10 +217,10 @@ async function getUserRewardGoldConisTask() {
 //完成天天任务
 async function match_transpond(title, rewardActivityId) {
     return new Promise((resolve) => {
-        let match_transponddata = JSON.stringify({
+        let match_transponddata = encodeURIComponent(JSON.stringify({
             "activityType": `${rewardActivityId}`,
             "workId": "1803773"
-        });
+        }));
         let url = {
             url: `https://mobile.gome.com.cn/mobile/content/match/transpond`,
             body: `body=${match_transponddata}&sn=a6959c322316289385524323cba288a8b0b60b4c`,
@@ -243,13 +244,13 @@ async function match_transpond(title, rewardActivityId) {
                                 await $.wait(5000); //等待5秒
                                 await match_transpond(title, rewardActivityId);
                             } else {
-                                $.log(`${title}今日已完成`);
+                                $.log(`${title} 今日已完成`);
                             }
                         } else {
                             $.log(`完成天天任务 ` + html.failReason);
                         }
                     } else {
-                        $.log(`完成天天任务` + html.message);
+                        $.log(`完成天天任务 ` + html.message);
                     }
                 }
             } catch (e) {
