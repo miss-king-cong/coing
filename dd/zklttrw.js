@@ -80,7 +80,7 @@ async function initAccountInfo() {
         await sign_doSign();
         await $.wait(5000); //等待5秒
         await getUserRewardGoldConisTask();
-        await $.wait(5000); //等待5秒
+        await $.wait(600000); //等待10分钟
     }
 }
 
