@@ -79,7 +79,7 @@ async function initAccountInfo() {
         await $.wait(5000); //等待5秒
         await sign_doSign();
         await $.wait(5000); //等待5秒
-        await queryRedPacketActivityInfo();
+        await getUserRewardGoldConisTask();
         await $.wait(5000); //等待5秒
     }
 }
