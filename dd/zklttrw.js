@@ -80,6 +80,8 @@ async function initAccountInfo() {
         await sign_doSign();
         await $.wait(5000); //等待5秒
         await getUserRewardGoldConisTask();
+        await $.wait(5000); //等待5秒
+        await coins_exchange();
         await $.wait(600000); //等待10分钟
     }
 }
@@ -250,6 +252,45 @@ async function match_transpond(title, rewardActivityId) {
                         }
                     } else {
                         $.log(`完成天天任务 ` + html.message);
+                    }
+                }
+            } catch (e) {
+                $.logErr(e, resp);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+
+//小虎牙币兑换真快乐豆
+async function coins_exchange() {
+    return new Promise((resolve) => {
+        let url = {
+            url: `https://mobile.gome.com.cn/wap/content/match/coins/exchange`,
+            body: `body={"type":"2"}`,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Referer": `https://etm.m.gome.com.cn/ent-activity/tigerCoinCheck?trNav=1&trNavBG=000000&opacityBG=0&hideProgressBar=Y&statusBarBG=EC3F3D`,
+                "Cookie": `${Cookie2}`
+            }
+        };
+        $.post(url, async (err, resp, data) => {
+            try {
+                if (err) {
+                    $.log(`小虎牙币兑换真快乐豆Api请求失败`);
+                } else {
+                    let html = JSON.parse(data);
+                    if (html.status == 200) {
+                        if (html.isSuccess == "Y") {
+                            let content = html.data.content;
+                            $.log(`小虎牙币兑换真快乐豆 ${content}`);
+                            await $.wait(5000); //等待5秒
+                        } else {
+                            $.log(`小虎牙币兑换真快乐豆 ` + html.failReason);
+                        }
+                    } else {
+                        $.log(`小虎牙币兑换真快乐豆 ` + html.message);
                     }
                 }
             } catch (e) {
