@@ -142,7 +142,8 @@ async function saveSign() {
         $.post(url, async (err, resp, data) => {
             try {
                 if (err) {
-                    $.log(`签到Api请求失败`);
+                    let html = JSON.parse(data);
+                    $.log(`签到Api请求失败`+html.message);
                 } else {
                     let html = JSON.parse(data);
                     if (html.signBaseInfo) {
