@@ -80,6 +80,8 @@ async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
+        await findSignPage();
+        await $.wait(5000);
         await sendLatestSignCount();
         await $.wait(5000); //等待5秒
     }
@@ -100,7 +102,7 @@ function object2query3(t) {
     return c.join("");
 }
 
-//验证今日是否签到
+//查询
 async function sendLatestSignCount() {
     return new Promise((resolve) => {
         let url = {
@@ -120,19 +122,15 @@ async function sendLatestSignCount() {
         $.post(url, async (err, resp, data) => {
             try {
                 if (err) {
-                    $.log(`验证今日是否签到 Api请求失败`);
+                    $.log(`查询 Api请求失败`);
                 } else {
                     let data2 = JSON.parse(data);
                     if (data2.code == 800) {
                         let latestSignCount = data2.data.latestSignCount;
                         let integral = data2.data.integral;
-                        if (latestSignCount == 0) {
-                            await findSignPage();
-                        } else {
-                            $.log(`验证今日是否签到 今日已签到 共有${integral}积分`);
-                        }
+                        $.log(`查询 今日已签到 共有${integral}积分 已连续签到${latestSignCount}天`);
                     } else {
-                        $.log(`验证今日是否签到` + data2.msg);
+                        $.log(`查询` + data2.msg);
                     }
                 }
             } catch (e) {
@@ -222,7 +220,7 @@ async function signIn(dayOfToday) {
                         let latestDays = data2.data.latestDays;
                         let integral = data2.data.integral;
                         let latestSignCount = data2.data.latestSignCount;
-                        $.log(`签到成功 获得${integral}积分 已连续签到${latestDays}天`);
+                        $.log(`签到成功 获得${integral}积分 已连续签到${latestSignCount}天`);
                     } else {
                         $.log(`签到` + data2.msg);
                     }
