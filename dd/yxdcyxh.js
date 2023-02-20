@@ -114,7 +114,7 @@ async function sendLatestSignCount() {
             }),
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
-                "Referer": `https://enjoy-club-app-api.yuexiuproperty.cn/yxh-pro/`,
+                "Referer": `https://enjoy-club-app-api.yuexiuproperty.cn/yxh/`,
                 "jwt": `${jwt2}`,
                 "Cookie": `${Cookie2}`
             }
@@ -149,12 +149,13 @@ async function findSignPage() {
             url: `https://enjoy-club-app-api.yuexiuproperty.cn/api/cregistration/sign/findSignPage`,
             body: JSON.stringify({
                 "params": {
+                    "signTemplateType": "2",
                     "clientType": "1"
                 }
             }),
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
-                "Referer": `https://enjoy-club-app-api.yuexiuproperty.cn/yxh-pro/`,
+                "Referer": `https://enjoy-club-app-api.yuexiuproperty.cn/yxh/`,
                 "jwt": `${jwt2}`,
                 "Cookie": `${Cookie2}`
             }
@@ -197,14 +198,13 @@ async function signIn(dayOfToday) {
             body: JSON.stringify({
                 "params": {
                     "dayOfToday": `${dayOfToday}`,
-                    "taskCode": "RW00102",
-                    "taskRegisterCode": "30001",
+                    "signTemplateType": "2",
                     "clientType": "1"
                 }
             }),
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
-                "Referer": `https://enjoy-club-app-api.yuexiuproperty.cn/yxh-pro/`,
+                "Referer": `https://enjoy-club-app-api.yuexiuproperty.cn/yxh/`,
                 "jwt": `${jwt2}`,
                 "Cookie": `${Cookie2}`
             }
