@@ -168,7 +168,6 @@ async function findSignPage() {
                     let data2 = JSON.parse(data);
                     if (data2.code == 800) {
                         let pageList = data2.data.pageList;
-                        $.log(pageList);
                         for (let i = 0; i < pageList.length; i++) {
                             let state = pageList[i].state;
                             let days = pageList[i].days;
