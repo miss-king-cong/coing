@@ -75,7 +75,7 @@ async function initAccountInfo() {
     for (numUser = 0; numUser < totalUser; numUser++) {
         $.log(`用户` + (numUser + 1) + `开始执行`);
         await getEnvParam(numUser);
-        await sign_component_page("165034683866431");
+        //await sign_component_page("165034683866431");
         await $.wait(5000); //等待5秒
         await sign_component_page("206344479832606");
         await $.wait(5000); //等待5秒
