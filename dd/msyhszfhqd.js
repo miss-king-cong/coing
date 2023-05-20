@@ -105,10 +105,18 @@ function object2query3(t) {
 
 //打开获取Cookie
 async function getCookie() {
-    $.log(mcpCode);
     return new Promise((resolve) => {
+        let cnowTime = Date.now();
         let url = {
-            url: 'https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=' + mcpCode + 'pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=' + Date.now()
+            url: `https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=${mcpCode}&pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=${cnowTime}`,
+            headers: {
+                'Upgrade-Insecure-Requests': '1',
+                'User-Agent': 'Mozilla/5.0 (Linux; Android 9; ELE-AL00 Build/HUAWEIELE-AL00; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/3262 MMWEBSDK/20211001 Mobile Safari/537.36 MMWEBID/9916 MicroMessenger/8.0.16.2040(0x280010D2) Process/toolsmp WeChat/arm32 Weixin NetType/WIFI Language/zh_CN ABI/arm64',
+                'X-Requested-With': 'com.tencent.mm',
+                'Sec-Fetch-Site': 'cross-site',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Dest': 'document'
+            }
         };
         $.get(url, async (err, resp, data) => {
             try {
