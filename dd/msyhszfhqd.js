@@ -106,7 +106,6 @@ function object2query3(t) {
 async function getCookie() {
     return new Promise((resolve) => {
         let cnowTime = Date.now();
-        $.log(`https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=${mcpCode}&pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=${cnowTime}`);
         let url = {
             url: `https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=${mcpCode}&pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=${cnowTime}`,
             headers: {
@@ -123,7 +122,7 @@ async function getCookie() {
                 if (err) {
                     $.log(`获取Cookie Api请求失败`);
                 } else {
-                    $.log(resp);
+                    $.log(JSON.stringify(resp));
                     /*let html = JSON.parse(data);
                     if (html.code == 2000) {
                         let dou = html.data.dou;
