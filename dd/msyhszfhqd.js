@@ -106,7 +106,7 @@ function object2query3(t) {
 async function getCookie() {
     return new Promise((resolve) => {
         let url = {
-            url: `https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=${mcpCode}&pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime="`,
+            url: `https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=${mcpCode}&pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=`+Date.now(),
             headers: {
                 'X-Requested-With': `com.tencent.mm`,
             }
