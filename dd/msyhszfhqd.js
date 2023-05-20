@@ -70,6 +70,7 @@ async function checkEnv() {
 async function getEnvParam(userNum) {
     let appUrlArrVal = appUrlArr[userNum];
     mcpCode = appUrlArrVal;
+    $.log(mcpCode);
 }
 
 async function initAccountInfo() {
@@ -104,12 +105,10 @@ function object2query3(t) {
 
 //打开获取Cookie
 async function getCookie() {
+    $.log(mcpCode);
     return new Promise((resolve) => {
         let url = {
-            url: 'https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=' + mcpCode + 'pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=' + Date.now(),
-            headers: {
-                'X-Requested-With': 'com.tencent.mm',
-            }
+            url: 'https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=' + mcpCode + 'pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=' + Date.now()
         };
         $.get(url, async (err, resp, data) => {
             try {
