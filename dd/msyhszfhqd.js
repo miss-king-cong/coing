@@ -70,7 +70,6 @@ async function checkEnv() {
 async function getEnvParam(userNum) {
     let appUrlArrVal = appUrlArr[userNum];
     mcpCode = appUrlArrVal;
-    $.log(mcpCode);
 }
 
 async function initAccountInfo() {
@@ -107,6 +106,7 @@ function object2query3(t) {
 async function getCookie() {
     return new Promise((resolve) => {
         let cnowTime = Date.now();
+        $.log(`https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=${mcpCode}&pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=${cnowTime}`);
         let url = {
             url: `https://suzhsh.cmbc.com.cn/cmb_02_wechat/microsite/index?mcpCode=${mcpCode}&pageParam=0001&errcode=0&wxNo=gh_98abeee5c010&cnowTime=${cnowTime}`,
             headers: {
