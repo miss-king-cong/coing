@@ -111,7 +111,8 @@ async function getCookie() {
                 'X-Requested-With': 'com.tencent.mm',
                 'Sec-Fetch-Site': 'cross-site',
                 'Sec-Fetch-Mode': 'navigate',
-                'Sec-Fetch-Dest': 'document'
+                'Sec-Fetch-Dest': 'document',
+                'Cookie': ``
             }
         };
         $.get(url, async (err, resp, data) => {
