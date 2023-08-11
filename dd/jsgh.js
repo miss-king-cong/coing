@@ -14,4 +14,5 @@ cron "00 00 8,10 * * *" script-path=jd_speed_sign.js,tag=嘉兴工会
 
 ============小火箭=========
 嘉兴工会 = type=cron,script-path=jd_speed_sign.js, cronexpr="00 00 8,10 * * *", timeout=33600, enable=true
+const $ = new Env('嘉兴工会');
 */
